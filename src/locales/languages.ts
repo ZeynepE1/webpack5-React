@@ -1,4 +1,4 @@
 export default {
-  vi: 'Vietnamese',
+  de: 'Deutsch',
   en: 'English',
 };

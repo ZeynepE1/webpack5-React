@@ -1,15 +1,15 @@
-import thunk from 'redux-thunk';
-import { configureStore } from '@reduxjs/toolkit';
-import { createBrowserHistory } from 'history';
-import { routerMiddleware, connectRouter } from 'connected-react-router';
+import { configureStore } from '@reduxjs/toolkit'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+import thunk from 'redux-thunk'
 
-import appSlice from './slices/appSlice';
-import layoutSlice from './slices/layoutSlice';
-import authSlice from './slices/authSlice';
+import appSlice from './slices/appSlice'
+import authSlice from './slices/authSlice'
+import layoutSlice from './slices/layoutSlice'
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory()
 
-const middlewares = [routerMiddleware(history), thunk];
+const middlewares = [routerMiddleware(history), thunk]
 
 const store = configureStore({
   reducer: {
@@ -19,9 +19,9 @@ const store = configureStore({
     auth: authSlice,
   },
   middleware: middlewares,
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

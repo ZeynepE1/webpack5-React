@@ -1,39 +1,35 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { history } from '@/store';
-import { ConnectedRouter } from 'connected-react-router';
-import { ToastContainer } from 'react-toastify';
-import { Helmet } from 'react-helmet-async';
+import React, { Suspense } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 
-import Layout from '@/layouts';
-import PageLoading from '@/components/page-loading';
+import Layout from 'src/shared/layouts'
+import { history } from 'src/store'
 
-// multi language
-import '@/locales/i18n';
+import PageLoading from 'components/PageLoading'
 
-// load app SCSS styles
-import '@/styles/App.scss';
-
-// load Toast styles
-import 'react-toastify/dist/ReactToastify.css';
+import 'src/styles/App.scss'
 
 const ReactApp: React.FC = () => {
+  const { t } = useTranslation()
+  const title = t('appTitle')
   return (
     <Router>
-      <Helmet titleTemplate="%s - React Starter" defaultTitle="React Starter">
-        <meta name="description" content="A React Starter application" />
+      <Helmet defaultTitle={title}>
+        <title>{title}</title>
       </Helmet>
 
       <ConnectedRouter history={history}>
         <Suspense fallback={<PageLoading show />}>
           <Layout />
           <PageLoading />
+
+          <div>Deneme</div>
         </Suspense>
       </ConnectedRouter>
-
-      <ToastContainer />
     </Router>
-  );
-};
+  )
+}
 
-export default ReactApp;
+export default ReactApp

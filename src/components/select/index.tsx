@@ -1,18 +1,18 @@
-import useOutsideClick from '@/hooks/useOutsideClick';
-import React, { useRef, useState } from 'react';
-import ArrowDown from '@/static/images/icon/arrow-down.svg';
+import React, { useRef, useState } from 'react'
+
+import useOutsideClick from 'src/hooks/useOutsideClick'
 
 interface IOption {
-  value: any;
-  label: any;
+  value: any
+  label: any
 }
 
 interface IProps {
-  options: Array<IOption>;
-  width?: number;
-  onChange?: (option: IOption) => void;
-  className?: string;
-  defaultValue?: any;
+  options: Array<IOption>
+  width?: number
+  onChange?: (option: IOption) => void
+  className?: string
+  defaultValue?: any
 }
 
 const Select: React.FC<IProps> = ({
@@ -22,21 +22,21 @@ const Select: React.FC<IProps> = ({
   className,
   defaultValue,
 }) => {
-  const [show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false)
   const [option, setOption] = useState<IOption>(
-    options.find(opt => opt.value === defaultValue) || options[0],
-  );
-  const selectRef = useRef(null);
+    options.find(opt => opt.value === defaultValue) || options[0]
+  )
+  const selectRef = useRef(null)
   useOutsideClick(selectRef, () => {
-    show === true && setShow(false);
-  });
+    show === true && setShow(false)
+  })
 
   function handleSelectDropdown(option: IOption) {
-    const opt = options.find(opt => opt.value === option.value);
+    const opt = options.find(opt => opt.value === option.value)
 
-    typeof onChange === 'function' && onChange(opt);
-    setOption(opt);
-    setShow(false);
+    typeof onChange === 'function' && onChange(opt)
+    setOption(opt)
+    setShow(false)
   }
   return (
     <div
@@ -44,23 +44,22 @@ const Select: React.FC<IProps> = ({
       style={{ width }}
       className={`dropdown ${className || ''}`}
     >
-      <div onClick={() => setShow(true)} className="dropdown-select">
-        <span className="dropdown-selected">{option.label}</span>
-        <ArrowDown className={`dropdown-caret ${show ? 'up' : 'down'}`} />
+      <div onClick={() => setShow(true)} className='dropdown-select'>
+        <span className='dropdown-selected'>{option.label}</span>
       </div>
       <ul className={`dropdown-list ${show ? 'show' : ''}`}>
         {options.map(opt => (
           <li
             key={opt.value}
             onClick={() => handleSelectDropdown(opt)}
-            className="dropdown-item"
+            className='dropdown-item'
           >
             {opt.label}
           </li>
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Select;
+export default Select

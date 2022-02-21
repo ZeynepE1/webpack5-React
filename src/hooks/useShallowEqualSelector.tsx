@@ -1,4 +1,4 @@
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DefaultRootState {}
 export function useShallowEqualSelector<
@@ -6,5 +6,5 @@ export function useShallowEqualSelector<
   TSelected = unknown,
   // eslint-disable-next-line no-unused-vars
 >(selector: (state: TState) => TSelected): TSelected {
-  return useSelector(selector, shallowEqual);
+  return useSelector(selector, shallowEqual)
 }

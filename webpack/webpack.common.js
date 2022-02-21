@@ -1,24 +1,24 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
-const configPath = '../config';
-const paths = require(`${configPath}/paths`);
-const getClientEnvironment = require(`${configPath}/env`);
+const configPath = '../config'
+const paths = require(`${configPath}/paths`)
+const getClientEnvironment = require(`${configPath}/env`)
 
-const { appIndexJs, esLintFile, appBuild, publicUrlOrPath } = paths;
+const { appIndexJs, esLintFile, appBuild, publicUrlOrPath } = paths
 
 // We will provide `paths.publicUrlOrPath` to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
 // Get environment variables to inject into our app.
-const env = getClientEnvironment(publicUrlOrPath);
+const env = getClientEnvironment(publicUrlOrPath)
 
-const cssRegex = /\.css$/;
-const sassRegex = /\.(scss|sass)$/;
+const cssRegex = /\.css$/
+const sassRegex = /\.(scss|sass)$/
 
 module.exports = {
   entry: appIndexJs,
@@ -78,8 +78,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@/static': path.resolve(__dirname, '../public/static'),
-      '@': path.resolve(__dirname, '../src'),
+      src: path.resolve(__dirname, '../src'),
+      components: path.resolve(__dirname, '../src/components'),
+      assets: path.resolve(__dirname, '../src/assets'),
+      '"@mui/styled-engine': path.resolve(
+        __dirname,
+        '../node_modules/@mui/styled-engine-sc'
+      ),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },
@@ -107,4 +112,4 @@ module.exports = {
     // module chunks which are built will work in web workers as well.
     globalObject: 'this',
   },
-};
+}

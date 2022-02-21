@@ -1,41 +1,41 @@
-import { isEmptyObject } from '@/utils';
-import { history } from '@/store';
+import { isEmptyObject } from 'src/shared/utils'
+import { history } from 'src/store'
 
 export const goURL = (path = '/', state?: unknown): void => {
-  history.push(path, state);
-};
+  history.push(path, state)
+}
 
 export const replaceURL = (path = '/', state?: unknown): void => {
-  history.push(path, state);
-};
+  history.push(path, state)
+}
 
 export const generatePath = (
   paths: Array<string>,
-  queryParams?: { [key: string]: any },
+  queryParams?: { [key: string]: any }
 ): string => {
   if (!paths?.length) {
-    return '/';
+    return '/'
   }
 
   let queryString,
-    arrayPath = paths;
+    arrayPath = paths
   if (!isEmptyObject(queryParams)) {
     queryString = Object.keys(queryParams)
       .map((param: string) => `${param}=${queryParams[param]}`)
-      .join('&');
+      .join('&')
   }
 
   if (!Array.isArray(paths)) {
-    arrayPath = [paths];
+    arrayPath = [paths]
   }
 
-  const exactPaths = arrayPath.filter(Boolean);
+  const exactPaths = arrayPath.filter(Boolean)
   let fullPath = `${exactPaths.join('/')}${
     queryString ? '?' + queryString : ''
-  }`;
+  }`
 
   if (!fullPath.startsWith('/')) {
-    fullPath = '/' + fullPath;
+    fullPath = '/' + fullPath
   }
-  return fullPath;
-};
+  return fullPath
+}
